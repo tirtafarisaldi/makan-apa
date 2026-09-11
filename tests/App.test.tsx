@@ -3,8 +3,11 @@ import { render, screen } from "@testing-library/react";
 import App from "../src/components/App";
 
 describe("App", () => {
-  test("should render", () => {
+  test("renders food recommendation form and heading", () => {
     render(<App />);
-    expect(screen.getByText("Hello World!")).toBeTruthy();
+
+    expect(screen.getByText("Makan Apa")).toBeTruthy();
+    expect(screen.getByLabelText("Budget")) .toBeTruthy();
+    expect(screen.getByLabelText("Kategori makanan")) .toBeTruthy();
   });
 });

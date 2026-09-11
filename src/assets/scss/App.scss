@@ -1,12 +1,865 @@
-$bg-color: yellow;
-$border-color: red;
+$bg-deep: #0d110f;
+$bg-mid: #151a16;
+$glass-bg: rgba(255, 255, 255, 0.05);
+$glass-strong: rgba(255, 255, 255, 0.09);
+$glass-border: rgba(255, 255, 255, 0.09);
+$gold: #d6b274;
+$gold-deep: #b07f3f;
+$sage: #96b8a4;
+$text: #f3efe7;
+$muted: #9aa89f;
+$shadow-soft: 0 22px 60px rgba(0, 0, 0, 0.5);
 
-.app {
-  font-family: helvetica, arial, sans-serif;
-  padding: 2em;
-  border: 5px solid $border-color;
+* {
+  box-sizing: border-box;
+}
 
-  p {
-    background-color: $bg-color;
+html,
+body,
+#root {
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(214, 178, 116, 0.06), transparent 36%),
+    radial-gradient(circle at 82% 82%, rgba(150, 184, 164, 0.06), transparent 34%),
+    radial-gradient(circle at 55% 60%, rgba(60, 78, 66, 0.15), transparent 45%),
+    linear-gradient(160deg, $bg-deep 0%, $bg-mid 55%, #11130f 100%);
+  background-attachment: fixed;
+  color: $text;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  padding: 60px 22px 80px;
+  overflow: hidden;
+}
+
+.food-orn {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  filter: blur(0.5px);
+  opacity: 0.11;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.orn-ramen {
+  font-size: 6.5rem;
+  top: 4%;
+  right: 5%;
+  transform: rotate(12deg);
+}
+
+.orn-cake {
+  font-size: 5rem;
+  bottom: 3%;
+  left: 3%;
+  transform: rotate(-8deg);
+}
+
+.orn-sushi {
+  font-size: 4.5rem;
+  top: 26%;
+  left: 2%;
+  transform: rotate(-14deg);
+}
+
+.orn-pizza {
+  font-size: 5.5rem;
+  bottom: 8%;
+  right: 6%;
+  transform: rotate(10deg);
+}
+
+.orn-salad {
+  font-size: 4rem;
+  top: 58%;
+  right: 14%;
+  transform: rotate(16deg);
+}
+
+.orn-pan {
+  font-size: 5rem;
+  bottom: 30%;
+  left: 8%;
+  transform: rotate(-20deg);
+}
+
+.orn-hotpot {
+  font-size: 4.2rem;
+  top: 44%;
+  left: 22%;
+  transform: rotate(-6deg);
+}
+
+.orn-skewer {
+  font-size: 3.8rem;
+  top: 72%;
+  right: 3%;
+  transform: rotate(22deg);
+}
+
+.orn-burger {
+  font-size: 4rem;
+  top: 14%;
+  left: 14%;
+  transform: rotate(8deg);
+}
+
+.orn-fries {
+  font-size: 3.4rem;
+  top: 20%;
+  right: 24%;
+  transform: rotate(-12deg);
+}
+
+.orn-chicken {
+  font-size: 4.2rem;
+  bottom: 16%;
+  left: 30%;
+  transform: rotate(14deg);
+}
+
+.orn-juice {
+  font-size: 3.6rem;
+  top: 62%;
+  left: 4%;
+  transform: rotate(-9deg);
+}
+
+.orn-icecream {
+  font-size: 3.8rem;
+  top: 8%;
+  left: 40%;
+  transform: rotate(6deg);
+}
+
+.orn-dumpling {
+  font-size: 3.2rem;
+  bottom: 22%;
+  right: 30%;
+  transform: rotate(-18deg);
+}
+
+.orn-rice {
+  font-size: 3.6rem;
+  top: 36%;
+  right: 7%;
+  transform: rotate(12deg);
+}
+
+.orn-donut {
+  font-size: 3rem;
+  bottom: 42%;
+  right: 36%;
+  transform: rotate(-7deg);
+}
+
+.orn-steak {
+  font-size: 4.2rem;
+  top: 82%;
+  left: 46%;
+  transform: rotate(16deg);
+}
+
+.orn-shrimp {
+  font-size: 3.4rem;
+  bottom: 6%;
+  right: 46%;
+  transform: rotate(-13deg);
+}
+
+.logo-mark {
+  position: absolute;
+  top: 30px;
+  left: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: $gold;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.logo-mark .utensil {
+  font-size: 1rem;
+}
+
+.hero-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero-header h1 {
+  margin: 0;
+  font-size: clamp(3.2rem, 8vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  color: $text;
+}
+
+.hero-sub {
+  margin: 14px 0 0;
+  color: $muted;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+
+.food-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 22px auto 0;
+  color: $gold;
+  font-size: 1.1rem;
+}
+
+.food-divider::before,
+.food-divider::after {
+  content: "";
+  width: 72px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, $gold-deep, transparent);
+  opacity: 0.7;
+}
+
+.finder-form {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.finder-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.glass-field {
+  position: relative;
+  background: $glass-bg;
+  border: 1px solid $glass-border;
+  border-radius: 14px;
+  padding: 10px 12px 9px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.glass-field:focus-within {
+  border-color: rgba(214, 178, 116, 0.28);
+  background: $glass-strong;
+}
+
+.glass-field span.label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+  padding-left: 2px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $sage;
+}
+
+.glass-field span.label .field-icon {
+  font-size: 0.8rem;
+}
+
+.glass-field input,
+.glass-field select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: $text;
+  height: 30px;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.glass-field select {
+  cursor: pointer;
+}
+
+.glass-field select optgroup {
+  background: #161b17;
+  color: $sage;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+}
+
+.glass-field select option,
+.glass-field select optgroup option {
+  background: #161b17;
+  color: $text;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.85rem;
+}
+
+.glass-field input::placeholder {
+  color: rgba(139, 156, 145, 0.55);
+}
+
+.preset-chips {
+  display: flex;
+  gap: 5px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.preset-chips button {
+  border: 1px solid rgba(214, 178, 116, 0.18);
+  background: rgba(214, 178, 116, 0.07);
+  color: $gold;
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.preset-chips button:hover {
+  background: rgba(214, 178, 116, 0.16);
+}
+
+.preset-chips button.active {
+  background: rgba(214, 178, 116, 0.22);
+  border-color: rgba(214, 178, 116, 0.45);
+}
+
+.field-full {
+  grid-column: span 4;
+}
+
+.field-food {
+  grid-column: span 4;
+}
+
+.field-hint {
+  display: block;
+  margin-top: 4px;
+  padding-left: 2px;
+  font-size: 0.62rem;
+  color: rgba(139, 156, 145, 0.6);
+}
+
+.primary-button {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  margin: 18px auto 0;
+  height: 46px;
+  border: 1px solid rgba(214, 178, 116, 0.3);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(214, 178, 116, 0.14), rgba(176, 127, 63, 0.1));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: $gold;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.primary-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(214, 178, 116, 0.5);
+  background: linear-gradient(135deg, rgba(214, 178, 116, 0.22), rgba(176, 127, 63, 0.16));
+}
+
+.primary-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status-banner {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.status-banner.error {
+  background: rgba(150, 60, 60, 0.18);
+  color: #e2b0a8;
+  border: 1px solid rgba(200, 100, 90, 0.25);
+}
+
+.location-block {
+  position: relative;
+  z-index: 1;
+  background: $glass-bg;
+  border: 1px solid $glass-border;
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 14px 14px 12px;
+  margin: 0 0 12px;
+}
+
+.location-block:focus-within {
+  border-color: rgba(214, 178, 116, 0.28);
+  background: $glass-strong;
+}
+
+.location-block__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.location-block__title {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $sage;
+}
+
+.location-block__loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  color: $sage;
+  background: rgba(150, 184, 164, 0.08);
+  border: 1px solid rgba(150, 184, 164, 0.16);
+  padding: 6px 10px;
+  border-radius: 999px;
+  max-width: 55%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.location-block__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(13, 17, 15, 0.6);
+  border: 1px solid $glass-border;
+  border-radius: 12px;
+  padding: 4px 4px 4px 12px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.location-block__search:focus-within {
+  border-color: rgba(214, 178, 116, 0.6);
+  box-shadow: 0 0 0 3px rgba(214, 178, 116, 0.12);
+}
+
+.location-block__search-icon {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.location-block__search input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 10px 0;
+  color: $text;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.location-block__search input::placeholder {
+  color: rgba(195, 211, 202, 0.4);
+}
+
+.location-block__search button {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, $gold, #b07f3f);
+  color: #13100b;
+  border: none;
+  border-radius: 9px;
+  padding: 10px 18px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.location-block__search button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.location-block__current {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  border: 1px dashed rgba(214, 178, 116, 0.28);
+  border-radius: 10px;
+  background: rgba(214, 178, 116, 0.05);
+  color: $gold;
+  padding: 9px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.location-block__current:hover {
+  background: rgba(214, 178, 116, 0.12);
+  border-color: rgba(214, 178, 116, 0.5);
+}
+
+.location-block__search-results {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+  background: #111612;
+  border: 1px solid $glass-border;
+  border-radius: 12px;
+  box-shadow: $shadow-soft;
+}
+
+.location-block__search-results li + li {
+  margin-top: 2px;
+}
+
+.location-block__search-results button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: $text;
+  font-size: 0.85rem;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.location-block__search-results button:hover {
+  background: rgba(214, 178, 116, 0.12);
+  color: #fff;
+}
+
+.search-result-pin {
+  flex-shrink: 0;
+}
+
+.location-block__hint {
+  margin: 8px 2px 0;
+  color: rgba(139, 156, 145, 0.7);
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+
+.results-block {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 44px auto 0;
+}
+
+.results-head {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.results-head h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+  letter-spacing: -0.03em;
+  color: $gold;
+}
+
+.result-summary {
+  margin: 12px auto 20px;
+  max-width: 720px;
+  line-height: 1.7;
+  color: $muted;
+  font-size: 0.94rem;
+}
+
+.result-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.results-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 48px 16px;
+  border: 1px dashed rgba(214, 178, 116, 0.25);
+  border-radius: 18px;
+  text-align: center;
+}
+
+.results-empty__emoji {
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+.results-empty__title {
+  margin: 0;
+  color: $muted;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.results-empty__hint {
+  margin: 0;
+  color: rgba(139, 156, 145, 0.7);
+  font-size: 0.85rem;
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+.result-chips span {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(214, 178, 116, 0.07);
+  border: 1px solid rgba(214, 178, 116, 0.14);
+  color: $gold;
+  padding: 7px 13px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.restaurant-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: $glass-bg;
+  border: 1px solid $glass-border;
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(214, 178, 116, 0.22);
+  background: $glass-strong;
+}
+
+.restaurant-card--clickable {
+  cursor: pointer;
+}
+
+.restaurant-card--clickable:focus-visible {
+  outline: 2px solid rgba(214, 178, 116, 0.5);
+  outline-offset: 2px;
+}
+
+.restaurant-card__cover {
+  position: relative;
+  min-height: 84px;
+  padding: 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.restaurant-card__emoji {
+  position: absolute;
+  right: 12px;
+  bottom: 6px;
+  font-size: 3rem;
+  opacity: 0.24;
+  transform: rotate(-8deg);
+  pointer-events: none;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.restaurant-card__cover span {
+  background: rgba(12, 15, 13, 0.66);
+  color: $gold;
+  border: 1px solid rgba(214, 178, 116, 0.16);
+  border-radius: 999px;
+  padding: 6px 11px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  position: relative;
+  z-index: 1;
+}
+
+.restaurant-card__cover .ai-badge {
+  color: $gold;
+  border-color: rgba(214, 178, 116, 0.16);
+  letter-spacing: 0.04em;
+}
+
+.restaurant-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 16px 16px 14px;
+}
+
+.restaurant-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.restaurant-card__header h3 {
+  margin: 0;
+  font-size: 1.04rem;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.restaurant-card__header strong {
+  color: $gold;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.restaurant-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 10px;
+  color: $muted;
+  font-size: 0.72rem;
+}
+
+.restaurant-meta span {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  padding: 4px 9px;
+}
+
+.restaurant-card__body p {
+  margin: 0 0 14px;
+  color: $muted;
+  line-height: 1.55;
+  font-size: 0.83rem;
+  flex: 1;
+}
+
+.restaurant-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.restaurant-card__footer span {
+  color: $gold;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.restaurant-card__footer button,
+.restaurant-card__footer .maps-link {
+  border: 1px solid rgba(214, 178, 116, 0.2);
+  border-radius: 12px;
+  background: rgba(214, 178, 116, 0.08);
+  color: $gold;
+  padding: 9px 14px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.restaurant-card__footer button:hover,
+.restaurant-card__footer .maps-link:hover {
+  background: rgba(214, 178, 116, 0.16);
+}
+
+@media (max-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .finder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .field-full,
+  .field-food {
+    grid-column: span 2;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .location-block__loc {
+    max-width: 100%;
+  }
+
+  .food-orn {
+    opacity: 0.07;
   }
 }

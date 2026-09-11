@@ -1,7 +1,7 @@
 {
-  "name": "react-webpack-typescript-starter",
+  "name": "makan apa",
   "version": "0.1.0",
-  "description": "Starter kit for React, Webpack (with Hot Module Replacement), Typescript and Babel.",
+  "description": "Aplikasi pencarian rekomendasi makanan sekitar",
   "keywords": [
     "react",
     "webpack",
@@ -26,9 +26,9 @@
     "build": "yarn run clean-dist && webpack --config=configs/webpack/prod.js",
     "clean-dist": "rimraf dist/*",
     "lint": "eslint './src/**/*.{js,ts,tsx}' --quiet",
-    "start": "yarn run start-dev",
-    "start-dev": "webpack serve --config=configs/webpack/dev.js",
-    "start-prod": "yarn run build && node express.js",
+    "start": "concurrently \"node express.js\" \"webpack serve --config=configs/webpack/dev.js\"",
+    "start-dev": "concurrently \"node express.js\" \"webpack serve --config=configs/webpack/dev.js\"",
+    "start-prod": "yarn run build && NODE_ENV=production node express.js",
     "test": "jest --coverage --watchAll --config=configs/jest.json"
   },
   "devDependencies": {
@@ -45,6 +45,7 @@
     "@typescript-eslint/eslint-plugin": "^5.49.0",
     "@typescript-eslint/parser": "^5.49.0",
     "babel-loader": "^9.1.2",
+    "concurrently": "^9.1.0",
     "css-loader": "^6.7.3",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
